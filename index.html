@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title></title>
+        <style media="screen">
+        div {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    #userName {
+        display: block;
+        width: 200px;
+        height: 30px;
+        margin: 0 auto;
+
+    }
+
+    #password {
+        display: block;
+        width: 200px;
+        height: 30px;
+        margin: 0 auto;
+
+    }
+
+    #save {
+        display: block;
+        width: 100px;
+        height: 20px;
+        margin: 0 auto;
+
+
+    }
+
+    #cokie {
+        display: block;
+        width: 100px;
+        height: 20px;
+        margin: 0 auto;
+
+    }
+
+
+
+        </style>
+    </head>
+    <body>
+
+      <div>
+          <input type = "text" id = "userName" placeholder = "用户名"> <br>
+          <input type="text" id = "password" placeholder = "密码"> <br>
+          <input type="button" value = "保存" id = "save">
+          <input type="button" value = "从cookie读取" id = "cokie">
+      </div>
+
+    </body>
+    <script src="jquery-2.2.3.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    window.onload = function  () {
+           var oBtn = document.getElementById('save');
+           var oBtn1 = document.getElementById('cokie');
+
+           var name ;
+           var pass ;
+
+           oBtn.onclick = function  () {
+
+               name = document.getElementById('userName').value;
+               pass = document.getElementById('password').value;
+
+               var oDate = new Date();
+               oDate.setDate(oDate.getDate() + 30);
+
+               // 写入cookie
+               document.cookie = "userName=" + name + "; expires=" + oDate;
+               document.cookie = "password=" + pass + "; expires=" + oDate;
+
+
+           }
+
+           oBtn1.onclick = function  () {
+               var oCookie = document.cookie.split('; ');
+
+               for (var i = 0; i < oCookie.length; i++) {
+                   var temp = oCookie[i].split('=');
+                   if (i == 1) {
+                       document.getElementById('userName').value = temp[1];
+                   };
+
+                   if (i == 0) {
+                       document.getElementById('password').value = temp[1];
+                   };
+               };
+
+           }
+       }
+    </script>
+<html>
